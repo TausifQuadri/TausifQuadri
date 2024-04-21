@@ -1,0 +1,118 @@
+<!-- inventory/templates/inventory/inventory_list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Inventory List - Medbill{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Add this line */
+        }
+
+        h2 {
+            color: #17a2b8;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #e6f7ff;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+{% endblock css %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mb-4">Inventory List</h2>
+        <!-- Display your inventory list in a table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Manufacturer</th>
+                    <th>Date of Manufacture</th>
+                    <th>Expiry Date</th>
+                    <th>Price</th>
+                    <th>Cost Price</th>
+                    <th>Description</th>
+                    <th>Batch Number</th>
+                    <th>Category</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in inventory_list %}
+                    <tr class="fade-in" >
+                        <td>{{ item.medicine_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.manufacturer }}</td>
+                        <td>{{ item.date_of_manufacture }}</td>
+                        <td>{{ item.expiry_date }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.cost_price }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.batch_number }}</td>
+                        <td>{{ item.category }}</td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block script %}
+        {{ block.super }}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".fade-in").each(function (index) {
+                    $(this).delay(2000 * index).fadeIn(500);
+                });
+            });
+        </script>
+    {% endblock script %}
+{% endblock body %}

@@ -1,0 +1,87 @@
+<!-- notification.html with Modern Design -->
+
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    /* Additional Styles for Notification */
+    .notification-container {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .notification-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .notification-message {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .notification-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .clear-notification-btn,
+    .restock-btn {
+        padding: 10px;
+        font-size: 16px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .clear-notification-btn:hover,
+    .restock-btn:hover {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    .clear-notification-btn {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+
+    .restock-btn {
+        background-color: #2ecc71;
+        color: #fff;
+    }
+</style>
+{% endblock css %}
+
+
+{% block body %}
+<div class="container">
+    {% for notification in notifications %}
+    <div class="notification-container">
+        <div class="notification-message">
+            <p>{{ notification.message }}</p>
+        </div>
+
+        <div class="notification-actions">
+            <!-- Clear Notification Link -->
+            <a href="{% url 'clear_notification' notification.id %}" class="clear-notification-btn">Clear Notification</a>
+
+            <!-- Restock Button -->
+            {% if "will expire on" in notification.message or "out of stock" in notification.message %}
+            <form method="post" action="{% url 'restock_view' notification.medicine.id %}">
+                {% csrf_token %}
+                <button type="submit" class="restock-btn">Restock</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

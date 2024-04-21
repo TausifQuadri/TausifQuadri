@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Restock Medicine - Medbill{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        /* Modern styling for the restock form */
+        .form-container {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .form-container:hover {
+            transform: scale(1.02);
+        }
+
+        .form-title {
+            color: #343a40;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock css %}
+
+{% block body %}
+    <div class="container form-container">
+        <h2 class="form-title">Restock Form</h2>
+        <form method="post" action="{% url 'restock_view' medicine_id %}" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Restock</button>
+        </form>
+    </div>
+
+    {% block script %}
+        {{ block.super }}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Trigger the form prefilling logic
+                prefillForm('{{ medicine_id }}');
+
+                // Function to fetch medicine details and pre-fill the form
+                function prefillForm(medicineId) {
+                    // Convert medicineId to a number
+                    medicineId = parseInt(medicineId);
+
+                    // Fetch medicine details using AJAX
+                    $.ajax({
+                        url: '{% url "get_medicine_details_by_id" 0 %}'.replace('0', medicineId),
+                        dataType: 'json',
+                        success: function(data) {
+                            // Pre-fill form fields
+                            $('#id_medicine_name').val(data.medicine_name);
+                            $('#id_quantity').val(data.quantity);
+                            $('#id_manufacturer').val(data.manufacturer);
+                            $('#id_date_of_manufacture').val(data.date_of_manufacture);
+                            $('#id_expiry_date').val(data.expiry_date);
+                            $('#id_price').val(data.price);
+                            $('#id_cost_price').val(data.cost_price);
+                            $('#id_description').val(data.description);
+                            $('#id_batch_number').val(data.batch_number);
+                            $('#id_category').val(data.category);
+
+                            // Include other details as needed
+                        },
+                        error: function(error) {
+                            console.log('Error:', error);
+                        }
+                    });
+                }
+            });
+        </script>
+    {% endblock script %}
+{% endblock body %}

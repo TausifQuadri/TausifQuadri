@@ -1,0 +1,282 @@
+
+
+
+   <!-- Extending the Base HTML -->
+{% extends 'base.html' %}
+
+<!-- Setting the Title for This Page -->
+{% block title %}Home - MedBill{% endblock title %}
+{% block css %}
+    <style>
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Set a cool background color */
+        body {
+            background-color: #f0f5f9;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden; /* Disable horizontal scroll on smaller screens */
+        }
+        
+        /* Create a container for the content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Style the header with animation */
+        header {
+            background-color: #3498db;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+            font-size: 24px;
+            opacity: 0;
+            animation: fadeIn 0.5s 0.5s forwards;
+        }
+        
+        /* Style the navigation menu */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #2ecc71;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s 1s forwards;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #27ae60;
+        }
+        
+        /* Create a two-column layout with animation */
+        main {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            margin-top: 20px;
+        }
+        
+        /* Style the main content area */
+        section {
+            flex-basis: calc(70% - 20px);
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 5px;
+            opacity: 0;
+            animation: fadeIn 0.5s 1.5s forwards;
+        }
+        
+        /* Style the sidebar with animation */
+        aside {
+            flex-basis: calc(30% - 20px);
+            background-color: #3498db;
+            padding: 20px;
+            color: #fff;
+            border-radius: 5px;
+            opacity: 0;
+            animation: fadeIn 0.5s 1.5s forwards;
+        }
+        
+        /* Style the footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0;
+            animation: fadeIn 0.5s 2s forwards;
+        }
+        
+        /* Add delay to animations for a smooth load */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Feature Animation Section Styles */
+        .container.text-center {
+            background: linear-gradient(#17a2b8, #054f5a, #7eacb3, #054f5a);
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            margin-bottom: 20px;
+            transition: opacity 0.3s ease-in-out;
+            background-color: #fff; /* Set card background color to white */
+            border-radius: 10px; /* Add border-radius for a rounded appearance */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            height: 100%;
+        }
+        
+        .card:hover {
+            opacity: 0.73;
+        }
+        
+        /* Style for the card titles */
+        .card-title {
+            color: #17a2b8;
+        }
+        
+        /* Explore MedBill Heading Styles */
+        .container.text-center h2 {
+            color: #fff; /* Set heading color to white */
+            margin-bottom: 30px;
+            font-weight: bold; /* Add font weight for emphasis */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow for better visibility */
+        }
+        
+        /* Optional: Add styles for the card text */
+        .card-text {
+            color: #333; /* Set card text color */
+        }
+        
+        /* Optional: Add styles for the jumbotron */
+        .jumbotron {
+            background: linear-gradient(to right, #17a2b8, #054f5a); /* Add linear gradient background */
+            color: #fff; /* Set jumbotron text color to white */
+            padding: 60px 30px;
+            border-radius: 10px; /* Add border-radius for a rounded appearance */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        header { animation-delay: 0.2s; }    /* Adjust this value as needed */
+        nav { animation-delay: 0.4s; }        /* Adjust this value as needed */
+        section { animation-delay: 0.6s; }  /* Adjust this value as needed */
+        aside { animation-delay: 0.6s; }    /* Adjust this value as needed */
+        footer { animation-delay: 0.8s; } 
+        
+    </style>
+{% endblock css %}
+
+
+
+<!-- Adding Content for the Body Block -->
+{% block body %}
+
+    <!-- Introduction Section -->
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Revolutionizing Healthcare with MedBill</h1>
+        <p class="lead">A transformative solution for the entire medical ecosystem</p>
+    </div>
+
+    <!-- Problem Section -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">A Heartbreaking Challenge for the Medical System</h2>
+                    <p class="card-text">
+                        In the midst of the COVID-19 pandemic, the healthcare system faced an unprecedented challenge. The fear of the unknown, coupled with misinformation, deterred people from seeking medical attention. This resulted in tragic consequences – lives lost, families devastated. The absence of accurate data hindered the system's ability to respond effectively, eroding the very foundations of healthcare: trust and timely information.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solution Section -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">MedBill - A Unified Solution for Healing</h2>
+                    <p class="card-text">
+                        In the aftermath of this crisis, MedBill emerged as a beacon of hope and healing for the medical system. It transcends being a mere billing solution; it is a commitment to rebuilding trust, streamlining operations, and illuminating the path forward. MedBill is not just a tool; it is a lifeline for the entire medical ecosystem, ensuring that no one is left behind in times of adversity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Animation Section -->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="my-4">Explore MedBill - HealthData Tracker Features</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Visualize Disease Hotspots in Real-Time</h5>
+                        <p class="card-text">
+                            Utilize dynamic and interactive maps within MedBill to visualize disease hotspots in real-time. Enhance your understanding of the current health landscape and make informed decisions for your well-being and that of your community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Receive Instant Alerts on Widespread Symptoms</h5>
+                        <p class="card-text">
+                            Stay informed with MedBill's instant alerts on widespread symptoms. Receive timely notifications that enable you to take proactive precautions, safeguarding yourself and your community from potential health risks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Unlock Powerful Analytics for Proactive Response</h5>
+                        <p class="card-text">
+                            Harness the power of advanced analytics within MedBill to understand and predict disease trends. Empower yourself with proactive response strategies, contributing to better healthcare outcomes for individuals and communities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explanation Section -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">How MedBill Works</h2>
+                    <p class="card-text">
+                        MedBill is a comprehensive solution designed to revolutionize healthcare operations. Its functionality revolves around precise billing for pharmacies and leveraging the billing data to track the spread of diseases. Here's a step-by-step overview of how MedBill works:
+                        <ol>
+                            <li><strong>Billing for Pharmacies:</strong> Pharmacies use MedBill for precise billing, ensuring accurate records of medications sold to patients.</li>
+                            <li><strong>Tracking Disease Spread:</strong> MedBill leverages the billing data to track the spread of diseases. By analyzing the medications purchased, MedBill identifies patterns and hotspots.</li>
+                            <li><strong>Visualizing Data:</strong> The system visualizes the data using interactive maps, providing a real-time snapshot of disease hotspots and trends.</li>
+                            <li><strong>Instant Alerts:</strong> Users receive instant alerts on widespread symptoms, enabling proactive measures to be taken in affected areas.</li>
+                            <li><strong>Powerful Analytics:</strong> MedBill's advanced analytics empower healthcare professionals with insights into disease trends, facilitating proactive responses and resource allocation.</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Icons Section -->
+    <div class="icon-section">
+        <i class="icon fas fa-heartbeat"></i>
+        <i class="icon fas fa-chart-line"></i>
+        <i class="icon fas fa-shield-alt"></i>
+        <!-- Add more icons as needed -->
+    </div>
+
+
+{% endblock body %}
+
