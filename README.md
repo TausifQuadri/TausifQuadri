@@ -8,10 +8,10 @@
 - ⚡ Fun fact: ... About me :I am also called rancho by my friends
 - Relted towith the instruction to setup the  medbill project 
 - 1)"pm1" is the name of the project
-  a)you will find "pm1/pm1" which is the project file.
-  b)you will find "pm1/medbil" this is the app file.
-  c)delete the file inside the "pm1/medbil/migration" folder use th migrations command .
-2)install these aditional libraries for the project
+    a)you will find "pm1/pm1" which is the project file.
+    b)you will find "pm1/medbil" this is the app file.
+    c)delete the file inside the "pm1/medbil/migration" folder then use  migrations commands. 
+- 2)install these aditional libraries for the project
 pip install reportlab
 pip install inflect
 pip install django-model-utils
