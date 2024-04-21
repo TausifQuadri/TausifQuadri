@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %} MedBill - Invoice {% endblock title %}
+{% block css %}
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding: 2rem;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        margin-top: 20px;
+        max-width: 800px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #17a2b8;
+        color: #ffffff;
+        border-radius: 10px 10px 0 0;
+        padding: 15px;
+    }
+
+    h4 {
+        margin-bottom: 0;
+    }
+
+    h5 {
+        color: #17a2b8;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #dee2e6;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .invoice-summary {
+        margin-top: 20px;
+    }
+
+    .btn-print {
+        background-color: #17a2b8;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .btn-print:hover {
+        background-color: #136b8f;
+    }
+</style>
+{% endblock css %}
+{% block body %}
+
+<!-- Invoice -->
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4>MedBill - Invoice</h4>
+        </div>
+        <div class="card-body">
+            <!-- Display Patient Information -->
+            <h5>Patient Information</h5>
+            <p><strong>Patient Name:</strong> {{ patient.name }}</p>
+            <p><strong>Date Prescribed:</strong> {{ patient.date_prescribed }}</p>
+            <p><strong>Prescribing Doctor:</strong> {{ patient.prescribing_doctor }}</p>
+            <p><strong>Additional Notes:</strong> {{ patient.additional_notes }}</p>
+            <p><strong>invoice Number:</strong> <B>{{ Invoice }}</B></p>
+
+            <!-- Display Medicine Information -->
+            <h5 class="mt-4">Medicine Details</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Manufacturer</th>
+                        <th>manufacturing Date</th>
+                        <th>Expiry Date</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total Price</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medicine in medicines %}
+                        <tr>
+                            <td>{{ medicine.medicine.medicine_name }}</td>
+                            <td>{{ medicine.medicine.manufacturer }}</td>
+                            <td>{{ medicine.medicine.date_of_manufacture }}</td>
+                            <td>{{ medicine.medicine.expiry_date}}</td>
+                            <td>{{ medicine.quantity }}</td>
+                            <td>₹{{ medicine.medicine.price }}</td>
+                            <td>₹{{ medicine.total_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Display Total Amount and Total Items -->
+            <div class="invoice-summary">
+                <h5>Invoice Summary</h5>
+                <p><strong>Total Amount:</strong> ₹{{ total_amount }}</p>
+                <p><strong>Total Items:</strong> {{ medicines.count }}</p>
+            </div>
+
+            <!-- Print and Download PDF Buttons -->
+            <div class="mt-4">
+                <a href="{% url 'generate_pdf' billing.id %}" class="btn btn-print">Download PDF</a>
+                <button class="btn btn-print" onclick="window.print()">Print Invoice</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

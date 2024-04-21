@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Bill {% endblock title %}
+
+{% block css %}
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #17a2b8;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    #netAmountContainer {
+      margin-top: 20px;
+      text-align: center;
+      padding: 10px; /* Added padding for better appearance */
+      border-top: 1px solid #dee2e6; /* Added border for separation */
+    }
+
+    #netAmount {
+      font-size: 24px;
+      font-weight: bold;
+      color: #28a745;
+    }
+  </style>
+{% endblock css %}
+
+{% block body %}
+  <div class="container">
+    <h1 class="mb-4">Billing Interface</h1>
+
+    <form method="post" action="{% url 'bill' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Generate Bill</button>
+      <button type="submit" class="btn btn-primary">Check Entry</button>
+    </form>
+
+    <div id="netAmountContainer" class="mt-4">
+      <p class="lead">Net Amount: ₹<span id="netAmount">0.00</span></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function updateNetAmount() {
+        const medicinesAndQuantities = document.getElementById('id_medicines_and_quantities');
+        const discountInput = document.getElementById('id_discount');
+        const netAmountContainer = document.getElementById('netAmountContainer');
+        const netAmountSpan = document.getElementById('netAmount');
+
+        let netAmount = 0;
+        const medicineLines = medicinesAndQuantities.value.split('\n');
+        const promises = medicineLines.map(async function (line) {
+          const [medicine, quantity] = line.split(',');
+
+          // Fetch details from InventoryItem using AJAX (Replace this with your logic)
+          const response = await fetch(`/api/get_medicine_details/?medicine=${medicine}`);
+          const data = await response.json();
+
+          // Replace this with your logic to calculate the total price for each medicine
+          const totalPrice = calculateTotalPrice(data.price, quantity);
+          netAmount += totalPrice;
+        });
+
+        Promise.all(promises).then(function () {
+          const discount = parseFloat(discountInput.value) || 0;
+          netAmount -= (netAmount * (discount / 100));
+          netAmountSpan.textContent = netAmount.toFixed(2);
+        });
+      }
+
+      const medicinesAndQuantities = document.getElementById('id_medicines_and_quantities');
+      medicinesAndQuantities.addEventListener('input', updateNetAmount);
+
+      const discountInput = document.getElementById('id_discount');
+      discountInput.addEventListener('input', updateNetAmount);
+
+      updateNetAmount();
+    });
+
+    function calculateTotalPrice(price, quantity) {
+      return price * parseInt(quantity, 10);
+    }
+  </script>
+{% endblock body %}

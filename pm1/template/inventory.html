@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+{%block title%} inentory{%endblock title%}
+
+{%block css %}
+<style>
+    .bg-mintgreen {
+        background-color: mediumseagreen ;
+    }
+
+    body {
+        padding: 3rem;
+        margin: 0;
+        border: 0;
+    }
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    h2 {
+        color: #17a2b8;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-register {
+        background-color: #17a2b8;
+        color: #ffffff;
+    }
+
+    .btn-register:hover {
+        background-color: #136b8f;
+    }
+
+   
+     
+    
+</style>
+{%endblock css%}
+{%block body%}
+
+<div class="container">
+    <h2 class="my-4">Register New Inventory</h2>
+    <form method="post" action="{% url 'inventory registration' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{%endblock body%}
