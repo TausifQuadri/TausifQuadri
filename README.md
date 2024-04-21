@@ -8,6 +8,16 @@
 - ⚡ Fun fact: ... About me :I am also called rancho by my friends
 
 <!---
-TausifQuadri/TausifQuadri is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
+1)"pm1" is the name of the project
+  a)you will find "pm1/pm1" which is the project file.
+  b)you will find "pm1/medbil" this is the app file.
+  c)delete the file inside the mgration folder use th migrations command.
+2)install these aditional libraries for the project
+pip install reportlab
+pip install inflect
+pip install django-model-utils
+pip install celery
+pip install django-celery-beat
+pip install django-celery-results
+
 --->
