@@ -9,8 +9,7 @@
 - Instruction relted to the to setup the  medbill project 
 - 1)"pm1" is the name of the project
     a)you will find "pm1/pm1" which is the project file.
-    b)you will find "pm1/medbil" this is the app file.
-    c)delete the file inside the "pm1/medbil/migration" folder then use  migrations commands. 
+    b)you will find "pm1/medbil" this is the app file
 - 2)install these aditional libraries for the project
   pip install reportlab,
 pip install inflect,
@@ -18,3 +17,4 @@ pip install django-model-utils,
 pip install celery,
 pip install django-celery-beat,
 pip install django-celery-results,
+pip install django-cron
